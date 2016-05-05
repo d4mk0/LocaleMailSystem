@@ -1,0 +1,11 @@
+<%= simple_form_for @message, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="form-group integer optional message_sender_id">
+    <label class="integer optional control-label" for="message_sender_id">Отправитель</label>
+    <p class="form-control-static"><%= current_user.email %></p>
+  </div>
+  <%= f.input :recepient_id, as: :select, collection: User.all.map { |u| [u.email, u.id]} %>
+  <%= f.input :subject %>
+  <%= f.input :text %>
+
+  <%= f.button :submit, 'Отправить сообщение', :class => 'btn-primary' %>
+<% end %>

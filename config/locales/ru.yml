@@ -1,2 +1,28 @@
 ru:
   hello: "Привет мир"
+  Monday: "Понедельник"
+  Tuesday: "Вторник"
+  Wednesday: "Среда"
+  Thursday: "Четверг"
+  Friday: "Пятница"
+  Saturday: "Суббота"
+  Sunday: "Воскресенье"
+  Mon: "Пон"
+  Tues: "Втр"
+  Wed: "Срд"
+  Thur: "Чтв"
+  Fri: "Птн"
+  Sat: "Сбт"
+  Sun: "Вск"
+
+  activerecord:
+    attributes:
+      message:
+        sender: Отправитель
+        sender_id: Отправитель
+        recepient: Получатель
+        recepient_id: Получатель
+        subject: Тема
+        text: Текст
+        deleted: Удалено
+        read: Прочитано

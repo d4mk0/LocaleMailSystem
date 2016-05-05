@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :messages do
+    get '(:path)', action: :index, on: :collection, as: '', constraints: { path: /(inbox|sent|trash)/ }
+    post :revive, on: :member
+  end
   get 'home/about'
 
   devise_for :users

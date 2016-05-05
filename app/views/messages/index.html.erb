@@ -1,0 +1,33 @@
+<% @messages.each do |message| %>
+  <div class="list-group">
+    <a href=<%= messages_path message %> class="list-group-item <%= 'read' unless message.read %>">
+        <span class="name" style="min-width: 120px; display: inline-block;">
+          <% if params[:path] == 'sent' %>
+            <%= message.recepient.email %>
+          <% else %>
+            <%= message.sender.email %>
+          <% end %>
+        </span>
+      <span class=""><b><%= message.subject %></b></span>
+      <span class="badge pull-right">
+        <%= l message.created_at, format: :short %>
+      </span>
+      <span class="pull-right">
+        <% if params[:path] != 'sent' %>
+          <% if message.deleted %>
+            <%= link_to 'Восстановить',
+                        revive_message_path(message),
+                        :method => :post,
+                        :class => 'btn btn-xs btn-success pull-right' %>
+          <% else %>
+            <%= link_to 'Удалить',
+                        message_path(message),
+                        :method => :delete,
+                        :data => { :confirm => 'Вы уверены?' },
+                        :class => 'btn btn-xs btn-danger pull-right' %>
+          <% end %>
+        <% end %>
+      </span>
+    </a>
+  </div>
+<% end %>
