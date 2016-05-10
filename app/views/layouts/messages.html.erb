@@ -54,7 +54,7 @@
                   <% if current_user.present? %>
                     <%= link_to "Выход", destroy_user_session_path, method: :delete %>
                   <% else %>
-                    <%= link_to "Вход", new_user_session_path %>
+                    <!--<%= link_to "Вход", new_user_session_path %>-->
                   <% end %>
                 </li>
               </ul>
