@@ -3,7 +3,7 @@
     <label class="integer optional control-label" for="message_sender_id">Отправитель</label>
     <p class="form-control-static"><%= current_user.email %></p>
   </div>
-  <%= f.input :recepient_id, as: :select, collection: User.all.map { |u| [u.email, u.id]} %>
+  <%= f.input :recepient_email %>
   <%= f.input :subject %>
   <%= f.input :text %>
 

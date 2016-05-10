@@ -1,9 +1,19 @@
+<div class"row">
+<% if params[:path] == 'trash' && @messages.present? %>
+  <%= link_to 'Очистить корзину',
+                empty_trash_messages_path,
+                :method => :delete,
+                :data => { :confirm => 'Вы уверены?' },
+                :class => 'btn btn-xs btn-danger' %>
+<% end %>
+</div>
+<br>
 <% @messages.each do |message| %>
   <div class="list-group">
     <a href=<%= messages_path message %> class="list-group-item <%= 'read' unless message.read %>">
         <span class="name" style="min-width: 120px; display: inline-block;">
           <% if params[:path] == 'sent' %>
-            <%= message.recepient.email %>
+            <%= message.recepient_email %>
           <% else %>
             <%= message.sender.email %>
           <% end %>

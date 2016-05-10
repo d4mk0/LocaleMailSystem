@@ -25,6 +25,8 @@ class MessagesController < ApplicationController
   # GET /messages/new
   def new
     @message = Message.new
+    @message.recepient_email = params[:recepient_email]
+    @message.subject = params[:subject]
   end
 
   # GET /messages/1/edit
@@ -34,8 +36,11 @@ class MessagesController < ApplicationController
   # POST /messages
   # POST /messages.json
   def create
+    recepient = User.find_by email: params[:message][:recepient_email]
+
     @message = Message.new(message_params)
     @message.sender = current_user
+    @message.recepient = recepient
 
     respond_to do |format|
       if @message.save
@@ -80,6 +85,11 @@ class MessagesController < ApplicationController
     end
   end
 
+  def empty_trash
+    current_user.received_messages.deleted.by_time.delete_all
+    redirect_to messages_url(path: :trash), notice: 'Корзина очищена.'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_message
@@ -88,7 +98,7 @@ class MessagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
-      params.require(:message).permit(:recepient_id, :subject, :text)
+      params.require(:message).permit(:subject, :text, :recepient_email)
     end
 
     def mark_as_read

@@ -2,7 +2,7 @@ class Message < ActiveRecord::Base
   belongs_to :sender, class_name: 'User'
   belongs_to :recepient, class_name: 'User'
 
-  validates_presence_of :subject, :text, :sender_id, :recepient_id
+  validates_presence_of :subject, :text, :sender_id, :recepient_email
 
   scope :deleted, -> { where(deleted: true) }
   scope :undeleted, -> { where(deleted: false) }

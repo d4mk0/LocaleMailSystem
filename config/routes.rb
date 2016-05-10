@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :messages do
     get '(:path)', action: :index, on: :collection, as: '', constraints: { path: /(inbox|sent|trash)/ }
     post :revive, on: :member
+    delete :empty_trash, on: :collection
   end
   get 'home/about'
 

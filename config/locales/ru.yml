@@ -22,6 +22,7 @@ ru:
         sender_id: Отправитель
         recepient: Получатель
         recepient_id: Получатель
+        recepient_email: Получатель
         subject: Тема
         text: Текст
         deleted: Удалено

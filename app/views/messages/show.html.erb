@@ -3,7 +3,7 @@
   <dt><strong><%= model_class.human_attribute_name(:sender_id) %>:</strong></dt>
   <dd><%= @message.sender.email %></dd>
   <dt><strong><%= model_class.human_attribute_name(:recepient_id) %>:</strong></dt>
-  <dd><%= @message.recepient.email %></dd>
+  <dd><%= @message.recepient_email %></dd>
   <dt><strong><%= model_class.human_attribute_name(:subject) %>:</strong></dt>
   <dd><%= @message.subject %></dd>
   <dt><strong><%= model_class.human_attribute_name(:text) %>:</strong></dt>
@@ -23,4 +23,7 @@
                 :data => { :confirm => 'Вы уверены?' },
                 :class => 'btn btn-danger' %>
   <% end %>
+  <%= link_to 'Ответить',
+                new_message_path(@message, recepient_email: @message.sender.email, subject: @message.subject),
+                :class => 'btn btn-success' %>
 <% end %>
