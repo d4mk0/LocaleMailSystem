@@ -27,3 +27,10 @@ ru:
         text: Текст
         deleted: Удалено
         read: Прочитано
+      user: 
+        password: Пароль
+        password_confirmation: Подтвердите пароль
+        remember_me: Запомнить меня
+  errors:
+    messages:
+      not_saved: Не сохранено из за ошибок
