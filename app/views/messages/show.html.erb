@@ -10,7 +10,7 @@
   <dd><%= simple_format @message.text %></dd>
 </dl>
 
-<% if @message.recepient == current_user %>
+<%# if @message.recepient == current_user %>
   <% if @message.deleted %>
     <%= link_to 'Восстановить',
                 revive_message_path(@message),
@@ -26,4 +26,4 @@
   <%= link_to 'Ответить',
                 new_message_path(@message, recepient_email: @message.sender.email, subject: @message.subject),
                 :class => 'btn btn-success' %>
-<% end %>
+<%# end %>

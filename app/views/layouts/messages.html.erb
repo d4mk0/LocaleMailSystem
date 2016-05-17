@@ -77,7 +77,7 @@
                         <a href=<%= messages_path(path: :inbox) %>><span class="badge pull-right"><%= current_user.received_messages.undeleted.unread.count %></span>Входящие</a>
                       </li>
                       <li class="<%= 'active' if params[:path] == 'sent' %>"><a href=<%= messages_path(path: :sent) %>>Отправленные</a></li>
-                      <li class="<%= 'active' if params[:path] == 'trash' %>"><a href=<%= messages_path(path: :trash) %>><span class="badge pull-right"><%= current_user.received_messages.deleted.count %></span>Удаленные</a></li>
+                      <li class="<%= 'active' if params[:path] == 'trash' %>"><a href=<%= messages_path(path: :trash) %>><span class="badge pull-right"><%= current_user.trashed_messages.count %></span>Удаленные</a></li>
                     </ul>
                   </div>
                   <div class="col-sm-9 col-md-10">

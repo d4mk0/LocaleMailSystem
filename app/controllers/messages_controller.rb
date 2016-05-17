@@ -9,9 +9,9 @@ class MessagesController < ApplicationController
     @messages = if params[:path] == 'inbox'
       current_user.received_messages.undeleted.by_time
     elsif params[:path] == 'sent'
-      current_user.sent_messages.by_time
+      current_user.sent_messages.undeleted.by_time
     elsif params[:path] == 'trash'
-      current_user.received_messages.deleted.by_time
+      current_user.trashed_messages.by_time
     else
       redirect_to messages_path(path: :inbox)
     end
@@ -38,12 +38,19 @@ class MessagesController < ApplicationController
   def create
     recepient = User.find_by email: params[:message][:recepient_email]
 
+    @message_received = Message.new(message_params)
+    @message_received.sender = current_user
+    @message_received.recepient = recepient
+    @message_received.message_type = 'received'
+
+
     @message = Message.new(message_params)
     @message.sender = current_user
     @message.recepient = recepient
+    @message.message_type = 'sent'
 
     respond_to do |format|
-      if @message.save
+      if @message.save && @message_received.save
         format.html { redirect_to messages_path(path: :sent), notice: 'Письмо успешно отправлено.' }
         format.json { render :show, status: :created, location: @message }
       else
@@ -79,8 +86,13 @@ class MessagesController < ApplicationController
 
   def revive
     @message.update(deleted: false)
+    path = if @message.message_type == 'sent'
+      messages_url(path: :sent)
+    else
+      messages_url(path: :inbox)
+    end
     respond_to do |format|
-      format.html { redirect_to messages_url, notice: 'Письмо восстановлено из корзины.' }
+      format.html { redirect_to path, notice: 'Письмо восстановлено из корзины.' }
       format.json { head :no_content }
     end
   end

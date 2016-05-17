@@ -23,7 +23,7 @@
         <%= l message.created_at, format: :short %>
       </span>
       <span class="pull-right">
-        <% if params[:path] != 'sent' %>
+        <%# if params[:path] != 'sent' %>
           <% if message.deleted %>
             <%= link_to 'Восстановить',
                         revive_message_path(message),
@@ -36,7 +36,7 @@
                         :data => { :confirm => 'Вы уверены?' },
                         :class => 'btn btn-xs btn-danger pull-right' %>
           <% end %>
-        <% end %>
+        <%# end %>
       </span>
     </a>
   </div>
